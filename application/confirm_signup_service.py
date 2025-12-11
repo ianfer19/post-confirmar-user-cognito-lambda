@@ -11,10 +11,12 @@ class ConfirmSignupService:
     def confirm(self, payload: dict):
         logger.info("Executing confirm signup service...")
 
-        if "username" not in payload or "code" not in payload:
-            raise DomainValidationError("username and code are required")
+        username = payload.get("username", "").strip()
+        code = payload.get("code", "").strip()
 
-        username = payload["username"]
-        code = payload["code"]
+        if not username or not code:
+            raise DomainValidationError("username and code are required and cannot be empty")
+
+        logger.info(f"Confirming user with username={username}")
 
         return self.cognito_repo.confirm_user(username, code)
