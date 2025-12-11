@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
-from application.signup_service import SignUpService
+from application.confirm_signup_service import SignUpService
 from domain.exceptions import DomainValidationError, CognitoError
 
 VALID_PAYLOAD = {
